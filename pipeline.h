@@ -75,4 +75,4 @@ private:
 };
 
 
-#endif	/* PIPELINE_H */#pragma once
+#endif	/* PIPELINE_H */
