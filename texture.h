@@ -1,4 +1,3 @@
-#pragma once
 #ifndef TEXTURE_H
 #define	TEXTURE_H
 
@@ -6,6 +5,7 @@
 
 #include <GL/glew.h>
 #include <Magick++.h>
+
 
 class Texture
 {
@@ -25,4 +25,4 @@ private:
 };
 
 
-#endif	/* TEXTURE_H */
+#endif TEXTURE_H

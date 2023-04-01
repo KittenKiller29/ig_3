@@ -3,7 +3,7 @@
 
 #include "math_3d.h"
 
-//const double M_PI = 3.14;
+
 class Camera
 {
 public:

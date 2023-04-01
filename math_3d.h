@@ -4,9 +4,9 @@
 #include <stdio.h>
 #include <math.h>
 
-#define ToRadian(x) ((x) * M_PI / 180.0f)
-#define ToDegree(x) ((x) * 180.0f / M_PI)
-const double M_PI = 3.14;
+#define ToRadian(x) ((x) * 3.14f / 180.f)
+#define ToDegree(x) ((x) * 180.f / 3.14f)
+
 struct Vector2i
 {
     int x;
@@ -133,6 +133,7 @@ public:
         m[3][0] = 0.0f; m[3][1] = 0.0f; m[3][2] = 0.0f; m[3][3] = 1.0f;
     }
 
+    
     inline Matrix4f operator*(const Matrix4f& Right) const
     {
         Matrix4f Ret;

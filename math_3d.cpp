@@ -1,5 +1,6 @@
 #include "math_3d.h"
 
+
 Vector3f Vector3f::Cross(const Vector3f& v) const
 {
     const float _x = y * v.z - z * v.y;
@@ -8,6 +9,7 @@ Vector3f Vector3f::Cross(const Vector3f& v) const
 
     return Vector3f(_x, _y, _z);
 }
+
 
 Vector3f& Vector3f::Normalize()
 {
@@ -82,6 +84,7 @@ void Matrix4f::InitTranslationTransform(float x, float y, float z)
     m[2][0] = 0.0f; m[2][1] = 0.0f; m[2][2] = 1.0f; m[2][3] = z;
     m[3][0] = 0.0f; m[3][1] = 0.0f; m[3][2] = 0.0f; m[3][3] = 1.0f;
 }
+
 
 
 void Matrix4f::InitCameraTransform(const Vector3f& Target, const Vector3f& Up)

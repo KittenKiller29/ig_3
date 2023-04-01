@@ -27,12 +27,13 @@ struct Vertex
 };
 
 
-GLuint VBO;
-GLuint IBO;
-GLuint gWVPLocation;
+GLuint VBO; 
+GLuint IBO; 
+GLuint gWVPLocation; 
 GLuint gSampler;
-Texture* pTexture = NULL;
-Camera* pGameCamera = NULL;
+Texture* pTexture = NULL; 
+Camera* pGameCamera = NULL; 
+
 
 static const char* pVS = "                                                          \n\
 #version 330                                                                        \n\
@@ -64,16 +65,19 @@ void main()                                                                     
     FragColor = texture2D(gSampler, TexCoord0.xy);                                  \n\
 }";
 
+
 static void RenderSceneCB()
 {
     pGameCamera->OnRender();
 
     glClear(GL_COLOR_BUFFER_BIT);
 
+    
     static float Scale = 0.0f;
 
     Scale += 0.1f;
 
+   
     Pipeline p;
     p.Rotate(0.0f, Scale, 0.0f);
     p.WorldPos(0.0f, 0.0f, 3.0f);
@@ -84,17 +88,17 @@ static void RenderSceneCB()
 
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO); 
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0); 
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)12);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
     pTexture->Bind(GL_TEXTURE0);
     glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
 
-    glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(0); 
     glDisableVertexAttribArray(1);
 
-    glutSwapBuffers();
+    glutSwapBuffers(); 
 }
 
 
@@ -122,9 +126,12 @@ static void PassiveMouseCB(int x, int y)
 static void InitializeGlutCallbacks()
 {
     glutDisplayFunc(RenderSceneCB);
-    glutIdleFunc(RenderSceneCB);
+    glutIdleFunc(RenderSceneCB); 
+
+    
     glutSpecialFunc(SpecialKeyboardCB);
     glutPassiveMotionFunc(PassiveMouseCB);
+
     glutKeyboardFunc(KeyboardCB);
 }
 
@@ -144,11 +151,13 @@ static void CreateVertexBuffer()
 
 static void CreateIndexBuffer()
 {
+    
     unsigned int Indices[] = { 0, 3, 1,
                                1, 3, 2,
                                2, 3, 0,
                                1, 2, 0 };
 
+    
     glGenBuffers(1, &IBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
@@ -157,13 +166,15 @@ static void CreateIndexBuffer()
 
 static void AddShader(GLuint ShaderProgram, const char* pShaderText, GLenum ShaderType)
 {
-    GLuint ShaderObj = glCreateShader(ShaderType);
+    GLuint ShaderObj = glCreateShader(ShaderType); 
 
+    
     if (ShaderObj == 0) {
         fprintf(stderr, "Error creating shader type %d\n", ShaderType);
         exit(0);
     }
 
+   
     const GLchar* p[1];
     p[0] = pShaderText;
     GLint Lengths[1];
@@ -179,7 +190,7 @@ static void AddShader(GLuint ShaderProgram, const char* pShaderText, GLenum Shad
         exit(1);
     }
 
-    glAttachShader(ShaderProgram, ShaderObj);
+    glAttachShader(ShaderProgram, ShaderObj); 
 }
 
 
@@ -225,26 +236,28 @@ static void CompileShaders()
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
+    glutInit(&argc, argv); 
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA); 
     glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     glutInitWindowPosition(100, 100);
     glutCreateWindow("Tutorial 16");
+
+    
     glutGameModeString("1280x1024@32");
     glutEnterGameMode();
 
-    InitializeGlutCallbacks();
+    InitializeGlutCallbacks(); 
 
     pGameCamera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    // Must be done after glut is initialized!
+    
     GLenum res = glewInit();
     if (res != GLEW_OK) {
         fprintf(stderr, "Error: '%s'\n", glewGetErrorString(res));
         return 1;
     }
 
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
     glFrontFace(GL_CW);
     glCullFace(GL_BACK);
     glEnable(GL_CULL_FACE);
@@ -254,15 +267,17 @@ int main(int argc, char** argv)
 
     CompileShaders();
 
-    glUniform1i(gSampler, 0);
+    glUniform1i(gSampler, 0); 
 
-    pTexture = new Texture(GL_TEXTURE_2D, "../Content/test.png");
+    Magick::InitializeMagick(nullptr); 
+
+    pTexture = new Texture(GL_TEXTURE_2D, "C:/Users/Azamat/Desktop/test.png");
 
     if (!pTexture->Load()) {
         return 1;
     }
 
-    glutMainLoop();
+    glutMainLoop(); 
 
     return 0;
 }
