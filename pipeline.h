@@ -3,7 +3,6 @@
 
 #include "math_3d.h"
 
-
 class Pipeline
 {
 public:
