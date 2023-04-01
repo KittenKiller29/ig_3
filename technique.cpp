@@ -38,7 +38,7 @@ bool Technique::AddShader(GLenum ShaderType, const char* pShaderText) {
         return false;
     }
 
-  
+   
     m_shaderObjList.push_back(ShaderObj);
 
     const GLchar* p[1];
@@ -86,7 +86,7 @@ bool Technique::Finalize() {
         return false;
     }
 
-    
+ 
     for (ShaderObjList::iterator it = m_shaderObjList.begin(); it != m_shaderObjList.end(); it++) {
         glDeleteShader(*it);
     }
