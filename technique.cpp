@@ -17,7 +17,7 @@ Technique::~Technique() {
         m_shaderProg = 0;
     }
 }
-//инициализация техники
+
 bool Technique::Init() {
     m_shaderProg = glCreateProgram();
 
@@ -29,7 +29,7 @@ bool Technique::Init() {
     return true;
 }
 
-//метод добавления шейдеров
+
 bool Technique::AddShader(GLenum ShaderType, const char* pShaderText) {
     GLuint ShaderObj = glCreateShader(ShaderType);
 
@@ -38,7 +38,7 @@ bool Technique::AddShader(GLenum ShaderType, const char* pShaderText) {
         return false;
     }
 
-    
+  
     m_shaderObjList.push_back(ShaderObj);
 
     const GLchar* p[1];
@@ -65,7 +65,6 @@ bool Technique::AddShader(GLenum ShaderType, const char* pShaderText) {
 }
 
 
-//метод линковки объектов
 bool Technique::Finalize() {
     GLint Success = 0;
     GLchar ErrorLog[1024] = { 0 };

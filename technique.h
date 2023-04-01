@@ -1,11 +1,9 @@
-#pragma once
 #ifndef TEXHNIQUE_H
 #define TEXHNIQUE_H
 
 #include <GL/glew.h>
 #include <list>
 
-/*Класс Technique поможет обернув основной функционал внутри себя*/
 class Technique
 {
 public:
