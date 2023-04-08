@@ -4,9 +4,32 @@
 #include <stdio.h>
 #include <math.h>
 
-#define ToRadian(x) ((x) * M_PI / 180.0f)
-#define ToDegree(x) ((x) * 180.0f / M_PI)
-const double M_PI = 3.14;
+#define ToRadian(x) ((x) * 3.14f / 180.0f)
+#define ToDegree(x) ((x) * 180.0f / 3.14f)
+
+struct Vector2i
+{
+    int x;
+    int y;
+};
+
+struct Vector2f
+{
+    float x;
+    float y;
+
+    Vector2f()
+    {
+    }
+
+    Vector2f(float _x, float _y)
+    {
+        x = _x;
+        y = _y;
+    }
+};
+
+
 struct Vector3f
 {
     float x;
@@ -55,11 +78,23 @@ struct Vector3f
 
     Vector3f& Normalize();
 
+    void Rotate(float Angle, const Vector3f& Axis);
+
     void Print() const
     {
         printf("(%.02f, %.02f, %.02f", x, y, z);
     }
 };
+
+
+inline Vector3f operator+(const Vector3f& l, const Vector3f& r)
+{
+    Vector3f Ret(l.x + r.x,
+        l.y + r.y,
+        l.z + r.z);
+
+    return Ret;
+}
 
 inline Vector3f operator-(const Vector3f& l, const Vector3f& r)
 {
@@ -122,4 +157,19 @@ public:
 };
 
 
-#endif	/* MATH_3D_H */#pragma once
+struct Quaternion
+{
+    float x, y, z, w;
+
+    Quaternion(float _x, float _y, float _z, float _w);
+
+    void Normalize();
+
+    Quaternion Conjugate();
+};
+
+Quaternion operator*(const Quaternion& l, const Quaternion& r);
+
+Quaternion operator*(const Quaternion& q, const Vector3f& v);
+
+#endif	/* MATH_3D_H */
